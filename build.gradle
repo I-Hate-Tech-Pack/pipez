@@ -68,7 +68,7 @@ publishing {
     repositories {
         maven {
             name = "MyMaven"
-            url = uri("https://maven.example.com/")
+            url = uri("https://maven.howxu.cn/")
             credentials {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")
