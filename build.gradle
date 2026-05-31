@@ -1,9 +1,6 @@
 plugins {
     id 'net.neoforged.moddev' version "${moddevgradle_version}"
-    id 'de.maxhenkel.cursegradle' version "${cursegradle_version}"
-    id 'com.modrinth.minotaur' version "${minotaur_version}"
     id 'com.gradleup.shadow' version "${shadow_version}"
-    id 'mod-update' version "${mod_update_version}"
     id 'maven-publish'
 }
 
