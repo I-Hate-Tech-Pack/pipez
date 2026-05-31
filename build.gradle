@@ -46,12 +46,12 @@ tasks.register('sourcesJar', Jar) {
     archiveClassifier = 'sources'
     manifest {
         attributes([
-                "Specification-Title": archivesBaseName,
-                "Specification-Vendor": "${author}",
+                "Specification-Title": "pipez",
+                "Specification-Vendor": "Max Henkel",
                 "Specification-Version": "1",
-                "Implementation-Title": archivesBaseName,
+                "Implementation-Title": "pipez",
                 "Implementation-Version": "${version}",
-                "Implementation-Vendor" :"${author}",
+                "Implementation-Vendor": "Max Henkel",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
