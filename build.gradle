@@ -4,6 +4,7 @@ plugins {
     id 'com.modrinth.minotaur' version "${minotaur_version}"
     id 'com.gradleup.shadow' version "${shadow_version}"
     id 'mod-update' version "${mod_update_version}"
+    id 'maven-publish'
 }
 
 apply from: "https://raw.githubusercontent.com/henkelmax/mod-gradle-scripts/${mod_gradle_script_version}/mod.gradle"
@@ -39,4 +40,39 @@ processResources {
 
 shadowJar {
     relocate 'de.maxhenkel.corelib', 'de.maxhenkel.pipez.corelib'
+}
+
+tasks.register('sourcesJar', Jar) {
+    archiveClassifier = 'sources'
+    manifest {
+        attributes([
+                "Specification-Title": archivesBaseName,
+                "Specification-Vendor": "${author}",
+                "Specification-Version": "1",
+                "Implementation-Title": archivesBaseName,
+                "Implementation-Version": "${version}",
+                "Implementation-Vendor" :"${author}",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+    from sourceSets.main.allJava
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact shadowJar
+            artifact sourcesJar
+        }
+    }
+    repositories {
+        maven {
+            name = "MyMaven"
+            url = uri("https://maven.example.com/")
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
+    }
 }
